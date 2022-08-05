@@ -1,53 +1,74 @@
 /** @format */
-const contacs = require("../models/contacts.js");
+const Contacts = require("../db/contactModel");
 
 const getContacts = async (req, res, next) => {
-  const data = await contacs.listContacts();
+  const contacts = await Contacts.find();
 
-  res.json({
-    status: "success",
-    code: 200,
-    data: data,
-  });
+  res.status(200).json({ code: 200, contacts });
 };
 
 const getContactsId = async (req, res, next) => {
   const { contactId } = req.params;
-  const data = await contacs.getContactById(contactId);
-  data.length !== 0
-    ? res.json({ status: "success", code: 200, data: data })
-    : res.json({ message: "Not found", code: 404 });
+
+  const contact = await Contacts.findById(contactId);
+
+  !contact
+    ? res.status(200).json({ status: "success", code: 200, data: contact })
+    : res.status(404).json({ message: "Not found", code: 404 });
 };
 
 const addContacts = async (req, res, next) => {
   const { name, email, phone } = req.body;
+  const contact = new Contacts({
+    name,
+    email,
+    phone,
+  });
 
-  const id = new Date();
-
-  const contact = { id, name, email, phone };
-
-  contacs.addContact(contact);
-  res.json({ code: 200, data: contact });
+  await contact.save();
+  res.status(200).json({ code: 200, data: contact });
 };
 
 const deleteContacts = async (req, res, next) => {
   const { contactId } = req.params;
-  const data = await contacs.getContactById(contactId);
 
-  if (data.length !== 0) {
-    await contacs.removeContact(contactId);
-    res.json({ message: "contact deleted", code: 200 });
-  } else res.json({ message: "Not found", code: 404 });
+  const respons = await Contacts.findByIdAndDelete(contactId);
+
+  if (respons) {
+    res
+      .status(200)
+      .json({ message: "contact deleted", code: 200, data: respons });
+  } else res.status(404).json({ message: "Not found", code: 404 });
 };
 
 const changeContacts = async (req, res, next) => {
   const { contactId } = req.params;
-  const body = req.body;
+  const { name, email, phone } = req.body;
 
-  if (body) {
-    const result = await contacs.updateContact(contactId, body);
-    res.json(result);
-  } else res.json({ message: "missing fields", code: 400 });
+  const respons = await Contacts.findByIdAndUpdate(contactId, {
+    $set: { name, email, phone },
+  });
+
+  if (respons) {
+    res
+      .status(200)
+      .json({ message: "contact updated", code: 200, data: respons });
+  } else res.status(400).json({ message: "missing fields", code: 400 });
+};
+
+const changeStatusContacts = async (req, res, next) => {
+  const { contactId } = req.params;
+  const { favorite } = req.body;
+
+  const respons = await Contacts.findByIdAndUpdate(contactId, {
+    favorite,
+  });
+
+  if (respons) {
+    res
+      .status(200)
+      .json({ message: "contact updated", code: 200, data: respons });
+  } else res.status(404).json({ message: "missing Not found", code: 404 });
 };
 
 module.exports = {
@@ -55,5 +76,6 @@ module.exports = {
   getContactsId,
   addContacts,
   changeContacts,
+  changeStatusContacts,
   deleteContacts,
 };
