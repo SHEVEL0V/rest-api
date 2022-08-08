@@ -18,6 +18,10 @@ const {
   deleteContacts,
 } = require("../controllers/contactsControllers");
 
+const { auth } = require("../middlewares/authorization");
+
+router.use(auth);
+
 router.get("/", getContacts);
 router.get("/:contactId", getContactsId);
 router.post("/", postContactsValidation, addContacts);
