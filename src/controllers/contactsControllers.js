@@ -10,9 +10,10 @@ const {
 
 const getContacts = async (req, res, next) => {
   const userId = req.user._id;
+  const params = req.query;
 
-  getUserContacts(userId)
-    .then((response) => res.status(200).json({ code: 200, contacts: response }))
+  getUserContacts(userId, params)
+    .then((contacts) => res.status(200).json({ code: 200, contacts }))
     .catch(({ message }) => res.status(401).json({ code: 401, message }));
 };
 
@@ -21,9 +22,9 @@ const getContactsId = async (req, res, next) => {
 
   getUserContactsById(contactId)
     .then((contact) =>
-      res.status(200).json({ status: "success", code: 200, data: contact })
+      res.status(200).json({ status: "success", code: 200, contact })
     )
-    .catch(({ message }) => res.status(404).json({ message, code: 404 }));
+    .catch(({ message }) => res.status(404).json({ code: 404, message }));
 };
 
 const addContacts = async (req, res, next) => {
@@ -38,10 +39,8 @@ const addContacts = async (req, res, next) => {
 const deleteContacts = async (req, res, next) => {
   const { contactId } = req.params;
   deleteUserContacts(contactId)
-    .then((respons) =>
-      res
-        .status(200)
-        .json({ message: "contact deleted", code: 200, data: respons })
+    .then((contacts) =>
+      res.status(200).json({ message: "contact deleted", code: 200, contacts })
     )
     .catch(({ message }) => res.status(404).json({ message, code: 404 }));
 };

@@ -2,13 +2,19 @@
 
 const Contacts = require("../db/contactModel");
 
-const getUserContacts = async (userId) => {
+const getUserContacts = async (userId, { page = 1, limit = 5, favorite }) => {
   if (!userId) {
     throw new Error("Not userId");
   }
-  const contact = await Contacts.find({ owner: userId });
+  const skip = Number(page * limit - limit);
+
+  const contact = await Contacts.find({ owner: userId })
+    .skip(skip)
+    .limit(Number(limit))
+    .find(favorite ? { favorite: favorite } : {});
+
   if (!contact) {
-    throw new Error("Not user");
+    throw new Error("Not found data");
   }
 
   return contact;
