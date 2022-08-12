@@ -1,15 +1,21 @@
 /** @format */
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const gravatar = require("gravatar");
 const User = require("../db/authModel");
 
 const registration = async (email, password) => {
-  const user = new User({ email, password: await bcrypt.hash(password, 10) });
+  const user = new User({
+    email,
+    password: await bcrypt.hash(password, 10),
+    avatarURL: gravatar.url(email),
+  });
 
   if (await User.findOne({ email })) {
     throw new Error("Email in use");
   }
   await user.save();
+  return user;
 };
 
 const login = async (email, password) => {
@@ -24,7 +30,7 @@ const login = async (email, password) => {
 
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
 
-  return token;
+  return [token, user];
 };
 
 const logout = async (id) => {

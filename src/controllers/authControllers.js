@@ -5,12 +5,9 @@ const registrationUser = async (req, res) => {
   const { email, password } = req.body;
 
   registration(email, password)
-    .then(() =>
+    .then(({ email, subscription }) =>
       res.status(409).json({
-        user: {
-          email: email,
-          subscription: "starter",
-        },
+        user: { email, subscription },
       })
     )
     .catch(({ message }) => res.status(409).json({ message }));
@@ -20,15 +17,12 @@ const loginUser = (req, res) => {
   const { email, password } = req.body;
 
   login(email, password)
-    .then((token) =>
+    .then((token, user) => {
       res.status(200).json({
         token,
-        user: {
-          email,
-          subscription: "starter",
-        },
-      })
-    )
+        user,
+      });
+    })
     .catch(({ message }) => res.status(401).json({ message }));
 };
 
