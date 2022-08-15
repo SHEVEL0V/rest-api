@@ -20,6 +20,7 @@ const registration = async (email, password) => {
 
 const login = async (email, password) => {
   const user = await User.findOne({ email });
+  console.log(user);
   if (!user) {
     throw new Error(`No user with email: ${email} found`);
   }
@@ -30,7 +31,10 @@ const login = async (email, password) => {
 
   const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
 
-  return [token, user];
+  return {
+    token,
+    user: { email: user.email, subscription: user.subscription },
+  };
 };
 
 const logout = async (id) => {

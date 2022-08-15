@@ -17,11 +17,8 @@ const loginUser = (req, res) => {
   const { email, password } = req.body;
 
   login(email, password)
-    .then((token, user) => {
-      res.status(200).json({
-        token,
-        user,
-      });
+    .then((response) => {
+      res.status(200).json(response);
     })
     .catch(({ message }) => res.status(401).json({ message }));
 };
