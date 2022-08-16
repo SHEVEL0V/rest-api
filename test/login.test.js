@@ -1,19 +1,25 @@
 /** @format */
 require("dotenv").config();
-
 const conectMongo = require("../src/db/connection");
 const { login } = require("../src/services/authServices");
 
-test("login response status 200", async () => {
+const email = "den@mail.com";
+const password = "12345678";
+
+test("fn login response token ", async () => {
   await conectMongo();
+  expect(login(email, password)).resolves.toHaveProperty("token");
+});
 
-  const email = "den@mail.com";
-  const password = "12345678";
+test("fn login response property 'status:200' ", () => {
+  login(email, password).then((res) => expect(res.status).toBe(200));
+});
 
-  await login(email, password).then((res) =>
-    expect(res.user).toEqual({
-      email: email,
-      subscription: "starter",
+test("fn login response property email,subscription ", () => {
+  login(email, password).then((res) =>
+    expect(res.user).restoEqual({
+      email: expect.any(String),
+      subscription: expect.any(String),
     })
   );
 });
