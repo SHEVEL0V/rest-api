@@ -17,7 +17,9 @@ test("fn login response property 'status:200' ", () => {
 
 test("fn login response property email,subscription ", () => {
   login(email, password).then((res) =>
-    expect(res.user).restoEqual({
+    expect(res.user).toEqual({
+      name: expect.any(String),
+      avatarURL: expect.any(String),
       email: expect.any(String),
       subscription: expect.any(String),
     })

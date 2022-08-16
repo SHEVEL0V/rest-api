@@ -3,7 +3,10 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middlewares/upload");
-const { authUserValidation } = require("../middlewares/loginValidation");
+const {
+  authUserValidation,
+  loginUserValidation,
+} = require("../middlewares/loginValidation");
 const { auth } = require("../middlewares/authorization");
 
 const {
@@ -14,7 +17,7 @@ const {
 const { updateAvatars } = require("../controllers/avatarController");
 
 router.post("/register", authUserValidation, registrationUser);
-router.post("/login", authUserValidation, loginUser);
+router.post("/login", loginUserValidation, loginUser);
 router.post("/logout/:id", auth, logoutUser);
 
 router.patch("/avatars", auth, upload.single("avatar"), updateAvatars);

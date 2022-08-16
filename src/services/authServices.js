@@ -4,8 +4,9 @@ const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
 const User = require("../db/authModel");
 
-const registration = async (email, password) => {
+const registration = async (email, password, name) => {
   const user = new User({
+    name,
     email,
     password: await bcrypt.hash(password, 10),
     avatarURL: gravatar.url(email),
@@ -33,7 +34,12 @@ const login = async (email, password) => {
   return {
     status: 200,
     token,
-    user: { email: user.email, subscription: user.subscription },
+    user: {
+      email: user.email,
+      subscription: user.subscription,
+      name: user.name,
+      avatarURL: user.avatarURL,
+    },
   };
 };
 

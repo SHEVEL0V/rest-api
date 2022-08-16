@@ -2,11 +2,11 @@
 const { registration, login, logout } = require("../services/authServices");
 
 const registrationUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, name } = req.body;
 
-  registration(email, password)
+  registration(email, password, name)
     .then(({ email, subscription }) =>
-      res.status(409).json({
+      res.status(200).json({
         user: { email, subscription },
       })
     )
