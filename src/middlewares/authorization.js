@@ -6,13 +6,13 @@ module.exports = {
     const { authorization } = req.headers;
 
     if (!authorization) {
-      next(new Error("Please , provide Header: 'Authorization' "));
+      throw new Error("Please , provide Header: 'Authorization' ");
     }
 
     const [type, token] = authorization.split(" ");
 
     if (!token) {
-      next(new Error("Please , provide a token"));
+      throw new Error("Please , provide a token");
     }
 
     try {

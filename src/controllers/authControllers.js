@@ -1,16 +1,46 @@
 /** @format */
-const { registration, login, logout } = require("../services/authServices");
+const {
+  registration,
+  veretification,
+  veretificationRepit,
+  login,
+  logout,
+} = require("../services/authServices");
 
 const registrationUser = async (req, res) => {
   const { email, password, name } = req.body;
 
   registration(email, password, name)
-    .then(({ email, subscription }) =>
-      res.status(200).json({
-        user: { email, subscription },
-      })
-    )
-    .catch(({ message }) => res.status(409).json({ message }));
+    .then((respons) => res.status(200).json(respons))
+    .catch(({ message }) =>
+      res
+        .status(409)
+
+        .json({ message })
+    );
+};
+
+const veretificationUser = (req, res) => {
+  const { verificationToken } = req.params;
+  veretification(verificationToken)
+    .then((response) => {
+      res
+        .status(200)
+        .send(
+          `<html><body><p>Please go to <a href=${process.env.REDIRECT_AUTH_URL}>Link</a></p></body></html>`
+        );
+    })
+    .catch(({ message }) => res.status(404).json({ message }));
+};
+
+const veretificationUserRepit = (req, res) => {
+  const { email } = req.body;
+
+  veretificationRepit(email)
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch(({ message }) => res.status(400).json({ message }));
 };
 
 const loginUser = (req, res) => {
@@ -37,4 +67,10 @@ const logoutUser = (req, res) => {
     .catch(({ message }) => res.status(401).json({ message }));
 };
 
-module.exports = { registrationUser, loginUser, logoutUser };
+module.exports = {
+  registrationUser,
+  veretificationUser,
+  veretificationUserRepit,
+  loginUser,
+  logoutUser,
+};
