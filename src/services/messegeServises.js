@@ -21,7 +21,7 @@ const sentMail = async (email, verificationToken) => {
       return { message: `Verification message sent to Email:${email}` };
     })
     .catch(() => {
-      throw new Error("Error send messege verification");
+      throw new Error("Error register");
     });
 };
 module.exports = { sentMail };
