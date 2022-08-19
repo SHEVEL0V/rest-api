@@ -55,13 +55,13 @@ const loginUser = (req, res) => {
 
 const logoutUser = (req, res) => {
   const { id } = req.params;
-  const token = req.headers.authorization;
+  const token = null;
 
   logout(id)
-    .then((respons) =>
-      res.status(200).json({
-        token: respons,
+    .then(() =>
+      res.status(204).json({
         Authorization: `Bearer ${token}`,
+        message: "No Content",
       })
     )
     .catch(({ message }) => res.status(401).json({ message }));

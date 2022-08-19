@@ -55,7 +55,7 @@ const veretificationRepit = async (email) => {
 };
 
 const login = async (email, password) => {
-  const user = await User.findOne({ email, verify: true });
+  const user = await User.findOne({ email, verify: true }).;
   if (!user) {
     throw new Error(`No user with email: ${email} found`);
   }
@@ -69,12 +69,7 @@ const login = async (email, password) => {
   return {
     status: 200,
     token,
-    user: {
-      email: user.email,
-      subscription: user.subscription,
-      name: user.name,
-      avatarURL: user.avatarURL,
-    },
+    user
   };
 };
 
