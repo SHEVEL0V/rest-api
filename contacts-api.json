@@ -2,7 +2,7 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Contacts Book - REST API 0.0.1",
-    "version": "0.0.01"
+    "version": "1.0.01"
   },
   "servers": [
     {
@@ -338,6 +338,15 @@
         "summary": "Get user contacts",
         "parameters": [
           {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "Bearer {token}"
+          },
+          {
             "in": "query",
             "name": "page",
             "schema": {
@@ -392,6 +401,17 @@
       "post": {
         "tags": ["contacts"],
         "summary": "Add contacts",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "Bearer {token}"
+          }
+        ],
         "requestBody": {
           "description": "Login user",
           "content": {
@@ -453,6 +473,15 @@
         "summary": "Get user contacts",
         "parameters": [
           {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "Bearer {token}"
+          },
+          {
             "in": "path",
             "name": "contactId",
             "schema": {
@@ -503,6 +532,15 @@
         "tags": ["contacts"],
         "summary": "Change user contacts",
         "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "Bearer {token}"
+          },
           {
             "in": "path",
             "name": "contactId",
@@ -575,6 +613,15 @@
         "summary": "Delete user contacts",
         "parameters": [
           {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "Bearer {token}"
+          },
+          {
             "in": "path",
             "name": "contactId",
             "schema": {
@@ -627,6 +674,15 @@
         "tags": ["contacts"],
         "summary": "Change user contacts status favorite",
         "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "example": "Bearer {token}"
+          },
           {
             "in": "path",
             "name": "contactId",

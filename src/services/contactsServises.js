@@ -6,6 +6,7 @@ const getUserContacts = async (userId, { page = 1, limit = 5, favorite }) => {
   if (!userId) {
     throw new Error("Not userId");
   }
+
   const skip = Number(page * limit - limit);
 
   const contact = await Contacts.find({ owner: userId })

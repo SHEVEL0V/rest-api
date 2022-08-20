@@ -1,3 +1,7 @@
+<!-- @format -->
+
+## Description API [http://localhost:3030/api-docs/]
+
 ## GoIT Node.js Course Template Homework
 
 Виконайте форк цього репозиторію для виконання домашніх завдань (2-6)
