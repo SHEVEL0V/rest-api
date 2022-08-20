@@ -32,7 +32,10 @@ const addContacts = async (req, res, next) => {
   const { name, email, phone } = req.body;
 
   postUserContact(owner, name, email, phone).then((contact) =>
-    res.status(200).json({ code: 200, data: contact })
+    res
+      .status(200)
+      .json({ code: 200, data: contact })
+      .catch(({ message }) => res.status(409).json({ message }))
   );
 };
 
@@ -42,7 +45,7 @@ const deleteContacts = async (req, res, next) => {
     .then((contacts) =>
       res.status(200).json({ message: "contact deleted", code: 200, contacts })
     )
-    .catch(({ message }) => res.status(404).json({ message, code: 404 }));
+    .catch(({ message }) => res.status(404).json({ message }));
 };
 
 const changeContacts = async (req, res, next) => {
@@ -54,7 +57,7 @@ const changeContacts = async (req, res, next) => {
         .status(200)
         .json({ message: "contact updated", code: 200, data: respons })
     )
-    .catch(({ message }) => res.status(400).json({ message, code: 400 }));
+    .catch(({ message }) => res.status(400).json({ message }));
 };
 
 const changeStatusContacts = async (req, res, next) => {
@@ -63,9 +66,7 @@ const changeStatusContacts = async (req, res, next) => {
 
   changeUserStatusContacts(contactId, favorite)
     .then((respons) =>
-      res
-        .status(200)
-        .json({ message: "contact updated", code: 200, data: respons })
+      res.status(200).json({ message: "contact updated", code: 200, respons })
     )
     .catch(({ message }) => res.status(400).json({ message, code: 400 }));
 };

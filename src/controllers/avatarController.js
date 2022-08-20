@@ -11,9 +11,7 @@ const updateAvatars = async (req, res) => {
   avatarRename(userId, tempUpload, filename)
     .then((avatarURL) =>
       res.status(200).json({
-        ResponseBody: {
-          avatarURL,
-        },
+        avatarURL,
       })
     )
     .catch(({ message }) => res.status(401).json({ message }));
