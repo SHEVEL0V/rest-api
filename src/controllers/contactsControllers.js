@@ -13,7 +13,9 @@ const getContacts = async (req, res, next) => {
   const params = req.query;
 
   getUserContacts(userId, params)
-    .then((contacts) => res.status(200).json({ code: 200, contacts }))
+    .then(({ contacts, total }) =>
+      res.status(200).json({ code: 200, total, contacts })
+    )
     .catch(({ message }) => res.status(401).json({ code: 401, message }));
 };
 

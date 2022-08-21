@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Contacts Book - REST API 0.0.1",
+    "title": "Contacts Book - REST API 1.0.1",
     "version": "1.0.01"
   },
   "servers": [
@@ -380,7 +380,19 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/contact"
+                  "properties": {
+                    "status": {
+                      "type": "number",
+                      "example": 200
+                    },
+                    "total": {
+                      "type": "number",
+                      "example": 10
+                    },
+                    "user": {
+                      "$ref": "#/components/schemas/user"
+                    }
+                  }
                 }
               }
             }
