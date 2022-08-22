@@ -12,14 +12,14 @@ const getUserContacts = async (userId, { page = 1, limit = 5, favorite }) => {
   const contacts = await Contacts.find({ owner: userId })
     .skip(skip)
     .limit(Number(limit))
-    .find(favorite ? { favorite: favorite } : {});
+    .find(JSON.parse(favorite) ? { favorite } : {});
 
   if (!contacts) {
     throw new Error("Not found data");
   }
 
   const total = await Contacts.find({ owner: userId })
-    .find(favorite ? { favorite: favorite } : {})
+    .find(JSON.parse(favorite) ? { favorite: favorite } : {})
     .count();
 
   return { contacts, total };

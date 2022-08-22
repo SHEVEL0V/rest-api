@@ -53,6 +53,7 @@ const deleteContacts = async (req, res, next) => {
 const changeContacts = async (req, res, next) => {
   const { contactId } = req.params;
   const data = req.body;
+
   changeUserContacts(contactId, data)
     .then((respons) =>
       res
