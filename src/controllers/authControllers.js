@@ -45,7 +45,7 @@ const veretificationUserRepit = (req, res) => {
 
 const loginUser = (req, res) => {
   const { email, password } = req.body;
-
+  c;
   login(email, password)
     .then((response) => {
       res.status(200).json(response);
