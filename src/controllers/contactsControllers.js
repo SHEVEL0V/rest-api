@@ -32,13 +32,10 @@ const getContactsId = async (req, res, next) => {
 const addContacts = async (req, res, next) => {
   const owner = req.user._id;
   const { name, email, phone } = req.body;
-
-  postUserContact(owner, name, email, phone).then((contact) =>
-    res
-      .status(200)
-      .json({ code: 200, data: contact })
-      .catch(({ message }) => res.status(409).json({ message }))
-  );
+  console.log(owner);
+  postUserContact(owner, name, email, phone)
+    .then((contact) => res.status(200).json({ code: 200, data: contact }))
+    .catch(({ message }) => res.status(409).json({ message }));
 };
 
 const deleteContacts = async (req, res, next) => {
@@ -66,7 +63,6 @@ const changeContacts = async (req, res, next) => {
 const changeStatusContacts = async (req, res, next) => {
   const { contactId } = req.params;
   const { favorite } = req.body;
-
   changeUserStatusContacts(contactId, favorite)
     .then((respons) =>
       res.status(200).json({ message: "contact updated", code: 200, respons })
