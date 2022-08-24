@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://rest-api-shevelov.herokuapp.com/api"
+      "url": "https://api-shevelov.herokuapp.com/api"
     }
   ],
   "paths": {
