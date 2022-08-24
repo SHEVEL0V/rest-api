@@ -23,7 +23,7 @@ const registrationUser = async (req, res) => {
 const veretificationUser = (req, res) => {
   const { verificationToken } = req.params;
   veretification(verificationToken)
-    .then((response) => {
+    .then(() => {
       res
         .status(200)
         .send(
@@ -45,7 +45,6 @@ const veretificationUserRepit = (req, res) => {
 
 const loginUser = (req, res) => {
   const { email, password } = req.body;
-  c;
   login(email, password)
     .then((response) => {
       res.status(200).json(response);

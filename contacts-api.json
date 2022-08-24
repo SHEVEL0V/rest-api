@@ -10,7 +10,7 @@
     }
   ],
   "paths": {
-    "/user/register": {
+    "/users/register": {
       "post": {
         "tags": ["user"],
         "summary": "Register user",
@@ -70,7 +70,7 @@
         }
       }
     },
-    "/user/verify/{verificationToken}": {
+    "/users/verify/{verificationToken}": {
       "get": {
         "tags": ["user"],
         "summary": "Verification users by token",
@@ -116,7 +116,7 @@
         }
       }
     },
-    "/user/verify": {
+    "/users/verify": {
       "post": {
         "tags": ["user"],
         "summary": "Repit sent message by user verification",
@@ -168,7 +168,7 @@
         }
       }
     },
-    "/user/login": {
+    "/users/login": {
       "post": {
         "tags": ["user"],
         "summary": "Login user",
@@ -227,7 +227,7 @@
         }
       }
     },
-    "/user/logout/{id}": {
+    "/users/logout/{id}": {
       "post": {
         "tags": ["user"],
         "summary": "Logout user",
@@ -273,7 +273,7 @@
         }
       }
     },
-    "/user/avatars": {
+    "/users/avatars": {
       "patch": {
         "tags": ["user"],
         "summary": "Update avatar user",
