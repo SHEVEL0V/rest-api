@@ -38,7 +38,7 @@ module.exports = {
           tlds: { allow: ["com", "net"] },
         })
         .optional(),
-      phone: Joi.string().min(7).max(13).optional(),
+      phone: Joi.string().min(7).max(14).optional(),
       favorite: Joi.boolean().optional(),
     });
 
