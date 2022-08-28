@@ -20,9 +20,8 @@ module.exports = {
 
     if (validationResult.error) {
       return res.status(400).json({
-        message: "missing required name field",
+        message: validationResult.error.details[0].message,
         code: 400,
-        status: validationResult.error.details,
       });
     }
 
@@ -46,9 +45,8 @@ module.exports = {
 
     if (validationResult.error) {
       return res.status(400).json({
-        message: "missing required name field",
+        message: validationResult.error.details[0].message,
         code: 400,
-        status: validationResult.error.details,
       });
     }
 
