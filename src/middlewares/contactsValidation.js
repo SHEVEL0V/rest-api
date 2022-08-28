@@ -5,11 +5,11 @@ const Joi = require("joi");
 module.exports = {
   postContactsValidation: (req, res, next) => {
     const schema = Joi.object({
-      name: Joi.string().alphanum().min(3).max(30).required(),
+      name: Joi.string().min(3).max(30).required(),
       email: Joi.string()
         .email({
           minDomainSegments: 2,
-          tlds: { allow: ["com", "net"] },
+          tlds: { allow: ["com", "net", "ua"] },
         })
         .required(),
       phone: Joi.string().min(7).max(10).required(),
@@ -35,7 +35,7 @@ module.exports = {
       email: Joi.string()
         .email({
           minDomainSegments: 2,
-          tlds: { allow: ["com", "net"] },
+          tlds: { allow: ["com", "net", "ua"] },
         })
         .optional(),
       phone: Joi.string().min(7).max(14).optional(),
