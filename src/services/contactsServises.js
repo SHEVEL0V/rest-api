@@ -35,6 +35,11 @@ const getUserContactsById = async (id) => {
 };
 
 const postUserContact = async (owner, name, email, phone) => {
+  const res = await Contacts.findOne({ owner, email });
+
+  if (res) {
+    throw new Error("This email already exists !");
+  }
   const contact = new Contacts({
     owner,
     name,

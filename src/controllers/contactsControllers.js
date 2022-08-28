@@ -32,7 +32,7 @@ const getContactsId = async (req, res, next) => {
 const addContacts = async (req, res, next) => {
   const owner = req.user._id;
   const { name, email, phone } = req.body;
-  console.log(owner);
+ 
   postUserContact(owner, name, email, phone)
     .then((contact) => res.status(200).json({ code: 200, data: contact }))
     .catch(({ message }) => res.status(409).json({ message }));
