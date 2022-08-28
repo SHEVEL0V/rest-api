@@ -31,7 +31,7 @@ module.exports = {
 
   putContactsValidation: (req, res, next) => {
     const schema = Joi.object({
-      name: Joi.string().alphanum().min(3).max(30).optional(),
+      name: Joi.string().min(3).max(30).optional(),
       email: Joi.string()
         .email({
           minDomainSegments: 2,
