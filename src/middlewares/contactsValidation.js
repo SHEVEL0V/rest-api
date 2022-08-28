@@ -12,7 +12,7 @@ module.exports = {
           tlds: { allow: ["com", "net", "ua"] },
         })
         .required(),
-      phone: Joi.string().min(7).max(10).required(),
+      phone: Joi.string().min(7).max(14).required(),
       favorite: Joi.boolean(),
     });
 
