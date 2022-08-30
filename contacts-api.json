@@ -2,7 +2,10 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Contacts Book - REST API 1.0.1",
-    "version": "1.0.01"
+    "version": "1.0.01",
+    "contact": {
+      "email": "ashevelevmti@gmail.com"
+    }
   },
   "servers": [
     {
@@ -180,10 +183,12 @@
                 "type": "object",
                 "properties": {
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "example": 12345678
                   },
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "max@mail.com"
                   }
                 }
               }
@@ -281,11 +286,10 @@
           {
             "in": "header",
             "name": "Authorization",
-            "schema": {
-              "type": "string"
-            },
             "required": true,
-            "example": "Bearer {token}"
+            "schema": {
+              "$ref": "#/components/schemas/token"
+            }
           }
         ],
         "requestBody": {
@@ -341,10 +345,8 @@
             "in": "header",
             "name": "Authorization",
             "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "example": "Bearer {token}"
+              "$ref": "#/components/schemas/token"
+            }
           },
           {
             "in": "query",
@@ -417,11 +419,10 @@
           {
             "in": "header",
             "name": "Authorization",
-            "schema": {
-              "type": "string"
-            },
             "required": true,
-            "example": "Bearer {token}"
+            "schema": {
+              "$ref": "#/components/schemas/token"
+            }
           }
         ],
         "requestBody": {
@@ -486,12 +487,11 @@
         "parameters": [
           {
             "in": "header",
+            "required": true,
             "name": "Authorization",
             "schema": {
-              "type": "string"
-            },
-            "required": true,
-            "example": "Bearer {token}"
+              "$ref": "#/components/schemas/token"
+            }
           },
           {
             "in": "path",
@@ -547,11 +547,10 @@
           {
             "in": "header",
             "name": "Authorization",
-            "schema": {
-              "type": "string"
-            },
             "required": true,
-            "example": "Bearer {token}"
+            "schema": {
+              "$ref": "#/components/schemas/token"
+            }
           },
           {
             "in": "path",
@@ -627,11 +626,10 @@
           {
             "in": "header",
             "name": "Authorization",
-            "schema": {
-              "type": "string"
-            },
             "required": true,
-            "example": "Bearer {token}"
+            "schema": {
+              "$ref": "#/components/schemas/token"
+            }
           },
           {
             "in": "path",
@@ -689,11 +687,10 @@
           {
             "in": "header",
             "name": "Authorization",
-            "schema": {
-              "type": "string"
-            },
             "required": true,
-            "example": "Bearer {token}"
+            "schema": {
+              "$ref": "#/components/schemas/token"
+            }
           },
           {
             "in": "path",
@@ -788,6 +785,10 @@
             "type": "string"
           }
         }
+      },
+      "token": {
+        "type": "string",
+        "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZkNDhiOGRlYjFjZjY0NDM1MmNhNGUiLCJpYXQiOjE2NjEwNjg5Mjl9.EO1qvuZEYETwv_6cyhE-MXmw_ytNK-5pf-CH-lr1-24"
       },
       "contact": {
         "type": "object",
