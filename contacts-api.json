@@ -788,7 +788,7 @@
       },
       "token": {
         "type": "string",
-        "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZkNDhiOGRlYjFjZjY0NDM1MmNhNGUiLCJpYXQiOjE2NjEwNjg5Mjl9.EO1qvuZEYETwv_6cyhE-MXmw_ytNK-5pf-CH-lr1-24"
+        "example": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmZkNDhiOGRlYjFjZjY0NDM1MmNhNGUiLCJpYXQiOjE2NjE4NzMzMzd9.pmkGMADc-4ZbAwE3M6y5wbxSyjfE28VjxAE96PKBC0w"
       },
       "contact": {
         "type": "object",
