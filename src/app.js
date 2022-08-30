@@ -3,6 +3,7 @@
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
+const path = require("path");
 const swaggerUi = require("swagger-ui-express");
 require("dotenv").config();
 
@@ -19,6 +20,9 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(express.static("public"));
 
+app.use("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "/views/helo.html"))
+);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/users", authRouter);
 app.use("/api/contacts", contactsRouter);
