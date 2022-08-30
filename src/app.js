@@ -20,12 +20,12 @@ app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(express.static("public"));
 
-app.use("/", (req, res) =>
-  res.sendFile(path.join(__dirname, "/views/helo.html"))
-);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use("/api/users", authRouter);
 app.use("/api/contacts", contactsRouter);
+app.use("/", (req, res) =>
+  res.sendFile(path.join(__dirname, "/views/helo.html"))
+);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
