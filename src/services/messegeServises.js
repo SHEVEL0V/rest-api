@@ -4,7 +4,7 @@ const sgMail = require("@sendgrid/mail");
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-const Url = "http://localhost:3030/api/users/verify/";
+const Url = process.env.REDIRECT_AUTH_URL;
 
 const sentMail = async (email, verificationToken) => {
   const msg = {
