@@ -27,7 +27,7 @@ const veretificationUser = (req, res) => {
       res
         .status(200)
         .send(
-          `<html><body><p>Please go to <a href=${process.env.REDIRECT_AUTH_URL}>Link</a></p></body></html>`
+          `<html><body><p>Please go to <a href=${process.env.REDIRECT_CONTACTS_URL}>Link</a></p></body></html>`
         );
     })
     .catch(({ message }) => res.status(404).json({ message }));
