@@ -27,8 +27,6 @@ const veretification = async (verificationToken) => {
   if (!user) {
     throw new Error("Not Found");
   }
-
-  user.verificationToken = "null";
   user.verify = true;
 
   await user.save();
@@ -50,8 +48,7 @@ const veretificationRepit = async (email) => {
   }
   const user = await User.findOne({ email, verify: false });
   if (user) {
-    const { verificationToken } = user;
-    await sentMail(email, verificationToken);
+    await sentMail(email, user.verificationToken);
   }
 };
 
