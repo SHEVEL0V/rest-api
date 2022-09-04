@@ -50,7 +50,8 @@ const veretificationRepit = async (email) => {
   }
   const user = await User.findOne({ email, verify: false });
   if (user) {
-    await sentMail(email, user.verificationToken);
+    const { verificationToken } = user;
+    await sentMail(email, verificationToken);
   }
 };
 
