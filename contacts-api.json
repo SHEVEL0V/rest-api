@@ -392,7 +392,7 @@
                       "example": 10
                     },
                     "user": {
-                      "$ref": "#/components/schemas/user"
+                      "$ref": "#/components/schemas/contact"
                     }
                   }
                 }
@@ -599,7 +599,7 @@
                       "example": "contact updated"
                     },
                     "user": {
-                      "$ref": "#/components/schemas/user"
+                      "$ref": "#/components/schemas/contact"
                     }
                   }
                 }
@@ -730,7 +730,7 @@
                       "example": 200
                     },
                     "user": {
-                      "$ref": "#/components/schemas/user"
+                      "$ref": "#/components/schemas/contact"
                     }
                   }
                 }
