@@ -1,7 +1,7 @@
 /** @format */
 const fs = require("fs/promises");
 const path = require("path");
-const User = require("../db/authModel");
+const User = require("../../db/authModel");
 
 const avatarRename = async (userId, tempUpload, filename) => {
   try {

@@ -5,19 +5,14 @@ const {
   veretificationRepit,
   login,
   logout,
-} = require("../services/authServices");
+} = require("../services/auth");
 
 const registrationUser = async (req, res) => {
   const { email, password, name } = req.body;
 
   registration(email, password, name)
     .then((respons) => res.status(200).json(respons))
-    .catch(({ message }) =>
-      res
-        .status(409)
-
-        .json({ message })
-    );
+    .catch(({ message }) => res.status(409).json({ message }));
 };
 
 const veretificationUser = (req, res) => {

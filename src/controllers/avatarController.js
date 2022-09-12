@@ -2,7 +2,7 @@
 
 const { ObjectId } = require("mongoose").Types;
 
-const { avatarRename } = require("../services/avatarsServises");
+const { avatarRename } = require("../services/avatar");
 
 const updateAvatars = async (req, res) => {
   const userId = ObjectId(req.user._id);
