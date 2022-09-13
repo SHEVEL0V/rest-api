@@ -15,6 +15,10 @@ module.exports = {
       throw new Error("Please , provide a token");
     }
 
+    if (type !== "Bearer") {
+      next(new Error("Token type not 'Bearer' "));
+    }
+
     try {
       const user = jwt.verify(token, process.env.JWT_SECRET);
       req.user = user;
