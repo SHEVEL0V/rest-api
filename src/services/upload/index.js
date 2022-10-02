@@ -1,16 +1,16 @@
 /** @format */
 const fs = require("fs/promises");
-const { Storage } = require("@google-cloud/storage");
 const { authModel } = require("./auth");
+const { Storage } = require("@google-cloud/storage");
 
 const uploadFile = async (userId, tempUpload, filename) => {
+  const jwt = await authModel();
+
   const bucketName = "bucket-shevelov";
-  const storage = new Storage();
+  const storage = new Storage({ authClient: jwt });
   const options = {
     destination: filename,
   };
-
-  await authModel();
 
   const [File] = await storage.bucket(bucketName).upload(tempUpload, options);
 
