@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.3",
   "info": {
-    "title": "Contacts Book - REST API 1.0.1",
+    "title": "Contacts Book - REST API 1.0.7",
     "version": "1.0.01",
     "contact": {
       "email": "ashevelevmti@gmail.com"
