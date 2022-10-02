@@ -4,18 +4,20 @@
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./server.js",
-    "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
+    "dev": "cross-env NODE_ENV=development nodemon ./server.js",
     "test": "jest",
     "lint": "eslint **/*.js",
     "lint:fix": "eslint --fix **/*.js"
   },
   "dependencies": {
+    "@google-cloud/storage": "^6.5.2",
     "@sendgrid/mail": "^7.7.0",
     "bcrypt": "^5.0.1",
     "cors": "2.8.5",
     "cross-env": "7.0.3",
     "dotenv": "^16.0.1",
     "express": "4.17.1",
+    "google-auth-library": "^8.5.2",
     "gravatar": "^1.8.2",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",

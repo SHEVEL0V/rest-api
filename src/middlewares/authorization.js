@@ -22,6 +22,7 @@ module.exports = {
     try {
       const user = jwt.verify(token, process.env.JWT_SECRET);
       req.user = user;
+      console.log("<<authorized OK!>>");
       next();
     } catch {
       next(res.status(401).json({ message: "Not authorized" }));
