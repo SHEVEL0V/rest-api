@@ -1,19 +1,20 @@
 /** @format */
 const User = require("../../db/authModel");
 const { sentMail } = require("../messege");
+const RequestError = require("../../helpers/requestError");
 
 const veretificationRepit = async (email) => {
   if (!email) {
-    throw new Error("Missing required field email");
+    throw RequestError(400, "Missing required field email");
   }
   const userM = await User.findOne({ email });
   if (!userM) {
-    throw new Error("This email not found");
+    throw RequestError(400, "This email not found");
   }
 
   const userV = await User.findOne({ email, verify: true });
   if (userV) {
-    throw new Error(`Verification has already been passed`);
+    throw RequestError(400, "Verification has already been passed");
   }
   const user = await User.findOne({ email, verify: false });
   if (user) {

@@ -1,12 +1,13 @@
 /** @format */
 
 const Contacts = require("../../db/contactModel");
+const RequestError = require("../../helpers/requestError");
 
 const postUserContact = async (owner, name, email, phone) => {
   const res = await Contacts.findOne({ owner, email });
 
   if (res) {
-    throw new Error("This email already exists !");
+    throw RequestError(400, "This email already exists !");
   }
   const contact = new Contacts({
     owner,

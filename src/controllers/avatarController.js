@@ -4,7 +4,7 @@ const { ObjectId } = require("mongoose").Types;
 
 const { uploadFile } = require("../services/upload");
 
-const updateAvatars = async (req, res) => {
+const updateAvatars = async (req, res, next) => {
   const userId = ObjectId(req.user._id);
   const { path: tempUpload, filename } = req.file;
 
@@ -14,7 +14,7 @@ const updateAvatars = async (req, res) => {
         avatarURL,
       })
     )
-    .catch(({ message }) => res.status(401).json({ message }));
+    .catch((err) => next(err));
 };
 
 module.exports = { updateAvatars };

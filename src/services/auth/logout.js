@@ -1,10 +1,11 @@
 /** @format */
 const User = require("../../db/authModel");
+const RequestError = require("../../helpers/requestError");
 
 const logout = async (id) => {
   const respons = await User.findByIdAndRemove(id);
   if (!respons) {
-    throw new Error("Not authorized");
+    throw RequestError(401);
   }
   return respons;
 };

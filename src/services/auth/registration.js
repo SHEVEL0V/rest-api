@@ -4,10 +4,11 @@ const gravatar = require("gravatar");
 const { v4: uuidv4 } = require("uuid");
 const User = require("../../db/authModel");
 const { sentMail } = require("../messege");
+const RequestError = require("../../helpers/requestError");
 
 const registration = async (email, password, name) => {
   if (await User.findOne({ email })) {
-    throw new Error("This email in use");
+    throw RequestError(401, "This email in use");
   }
   const user = new User({
     name,

@@ -1,10 +1,11 @@
 /** @format */
 
 const Contacts = require("../../db/contactModel");
+const RequestError = require("../../helpers/requestError");
 
 const getUserContacts = async (userId, { page = 1, limit = 5, favorite }) => {
   if (!userId) {
-    throw new Error("Not userId");
+    throw RequestError(400, "Not userId");
   }
 
   const skip = Number(page * limit - limit);
@@ -15,7 +16,7 @@ const getUserContacts = async (userId, { page = 1, limit = 5, favorite }) => {
     .find(JSON.parse(favorite) ? { favorite } : {});
 
   if (!contacts) {
-    throw new Error("Not found data");
+    throw RequestError(400, "Not found data");
   }
 
   const total = await Contacts.find({ owner: userId })

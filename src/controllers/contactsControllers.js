@@ -16,7 +16,7 @@ const getContacts = async (req, res, next) => {
     .then(({ contacts, total }) =>
       res.status(200).json({ code: 200, total, contacts })
     )
-    .catch(({ message }) => res.status(401).json({ code: 401, message }));
+    .catch((err) => next(err));
 };
 
 const getContactsId = async (req, res, next) => {
@@ -26,7 +26,7 @@ const getContactsId = async (req, res, next) => {
     .then((contact) =>
       res.status(200).json({ status: "success", code: 200, contact })
     )
-    .catch(({ message }) => res.status(404).json({ code: 404, message }));
+    .catch((err) => next(err));
 };
 
 const addContacts = async (req, res, next) => {
@@ -35,7 +35,7 @@ const addContacts = async (req, res, next) => {
 
   postUserContact(owner, name, email, phone)
     .then((contact) => res.status(200).json({ code: 200, data: contact }))
-    .catch(({ message }) => res.status(409).json({ message }));
+    .catch((err) => next(err));
 };
 
 const deleteContacts = async (req, res, next) => {
@@ -44,7 +44,7 @@ const deleteContacts = async (req, res, next) => {
     .then((contacts) =>
       res.status(200).json({ message: "contact deleted", code: 200, contacts })
     )
-    .catch(({ message }) => res.status(404).json({ message }));
+    .catch((err) => next(err));
 };
 
 const changeContacts = async (req, res, next) => {
@@ -57,7 +57,7 @@ const changeContacts = async (req, res, next) => {
         .status(200)
         .json({ message: "contact updated", code: 200, data: respons })
     )
-    .catch(({ message }) => res.status(400).json({ message }));
+    .catch((err) => next(err));
 };
 
 const changeStatusContacts = async (req, res, next) => {
@@ -67,7 +67,7 @@ const changeStatusContacts = async (req, res, next) => {
     .then((respons) =>
       res.status(200).json({ message: "contact updated", code: 200, respons })
     )
-    .catch(({ message }) => res.status(400).json({ message, code: 400 }));
+    .catch((err) => next(err));
 };
 
 module.exports = {

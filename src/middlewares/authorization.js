@@ -1,22 +1,23 @@
 /** @format */
 const jwt = require("jsonwebtoken");
+const RequestError = require("../helpers/requestError");
 
 module.exports = {
   auth: (req, res, next) => {
     const { authorization } = req.headers;
 
     if (!authorization) {
-      throw new Error("Please , provide Header: 'Authorization' ");
+      throw RequestError(401, "Please , provide Header: 'Authorization' ");
     }
 
     const [type, token] = authorization.split(" ");
 
     if (!token) {
-      throw new Error("Please , provide a token");
+      throw RequestError(401, "Please , provide a token");
     }
 
     if (type !== "Bearer") {
-      next(new Error("Token type not 'Bearer' "));
+      throw RequestError(401, "Token type not 'Bearer' ");
     }
 
     try {
@@ -25,7 +26,7 @@ module.exports = {
       console.log("<<authorized OK!>>");
       next();
     } catch {
-      next(res.status(401).json({ message: "Not authorized" }));
+      next(res.RequestError(401));
     }
   },
 };

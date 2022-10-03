@@ -1,6 +1,7 @@
 /** @format */
 
 const Contacts = require("../../db/contactModel");
+const RequestError = require("../../helpers/requestError");
 
 const changeUserContacts = async (id, data) => {
   const { name, email, phone } = data;
@@ -8,7 +9,7 @@ const changeUserContacts = async (id, data) => {
     $set: { name, email, phone },
   });
   if (!respons) {
-    throw new Error("Not found");
+    throw RequestError(404);
   }
   return respons;
 };

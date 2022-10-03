@@ -7,15 +7,15 @@ const {
   logout,
 } = require("../services/auth");
 
-const registrationUser = async (req, res) => {
+const registrationUser = async (req, res, next) => {
   const { email, password, name } = req.body;
 
   registration(email, password, name)
     .then((respons) => res.status(200).json(respons))
-    .catch(({ message }) => res.status(409).json({ message }));
+    .catch((err) => next(err));
 };
 
-const veretificationUser = (req, res) => {
+const veretificationUser = (req, res, next) => {
   const { verificationToken } = req.params;
   veretification(verificationToken)
     .then(() => {
@@ -25,29 +25,29 @@ const veretificationUser = (req, res) => {
           `<html><body><p>Please go to <a href=${process.env.REDIRECT_CONTACTS_URL}>Link</a></p></body></html>`
         );
     })
-    .catch(({ message }) => res.status(404).json({ message }));
+    .catch((err) => next(err));
 };
 
-const veretificationUserRepit = (req, res) => {
+const veretificationUserRepit = (req, res, next) => {
   const { email } = req.body;
 
   veretificationRepit(email)
     .then((response) => {
       res.status(200).json(response);
     })
-    .catch(({ message }) => res.status(400).json({ message }));
+    .catch((err) => next(err));
 };
 
-const loginUser = (req, res) => {
+const loginUser = (req, res, next) => {
   const { email, password } = req.body;
   login(email, password)
     .then((response) => {
       res.status(200).json(response);
     })
-    .catch(({ message }) => res.status(401).json({ message }));
+    .catch((err) => next(err));
 };
 
-const logoutUser = (req, res) => {
+const logoutUser = (req, res, next) => {
   const { id } = req.params;
   const token = null;
 
@@ -58,7 +58,7 @@ const logoutUser = (req, res) => {
         message: "No Content",
       })
     )
-    .catch(({ message }) => res.status(401).json({ message }));
+    .catch((err) => next(err));
 };
 
 module.exports = {

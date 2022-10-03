@@ -1,10 +1,11 @@
 /** @format */
 const User = require("../../db/authModel");
+const RequestError = require("../../helpers/requestError");
 
 const veretification = async (verificationToken) => {
   const user = await User.findOne({ verificationToken });
   if (!user) {
-    throw new Error("Not Found");
+    throw RequestError(404);
   }
   user.verify = true;
 
