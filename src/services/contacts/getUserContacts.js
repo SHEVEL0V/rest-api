@@ -16,7 +16,7 @@ const getUserContacts = async (
   const contacts = await Contacts.find({ owner: userId })
     .skip(skip)
     .limit(Number(limit))
-    .find({ favorite });
+    .find(favorite ? { favorite } : {});
 
   if (!contacts) {
     throw RequestError(400, "Not found data");
