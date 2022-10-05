@@ -12,62 +12,46 @@ const getContacts = async (req, res, next) => {
   const userId = req.user._id;
   const params = req.query;
 
-  getUserContacts(userId, params)
-    .then(({ contacts, total }) =>
-      res.status(200).json({ code: 200, total, contacts })
-    )
-    .catch((err) => next(err));
+  const { contacts, total } = await getUserContacts(userId, params);
+  return res.json({ total, contacts });
 };
 
 const getContactsId = async (req, res, next) => {
   const { contactId } = req.params;
 
-  getUserContactsById(contactId)
-    .then((contact) =>
-      res.status(200).json({ status: "success", code: 200, contact })
-    )
-    .catch((err) => next(err));
+  const response = await getUserContactsById(contactId);
+  return res.status(200).json({ contact: response });
 };
 
 const addContacts = async (req, res, next) => {
   const owner = req.user._id;
   const { name, email, phone } = req.body;
 
-  postUserContact(owner, name, email, phone)
-    .then((contact) => res.status(200).json({ code: 200, data: contact }))
-    .catch((err) => next(err));
+  const response = await postUserContact(owner, name, email, phone);
+  return res.json({ data: response });
 };
 
 const deleteContacts = async (req, res, next) => {
   const { contactId } = req.params;
-  deleteUserContacts(contactId)
-    .then((contacts) =>
-      res.status(200).json({ message: "contact deleted", code: 200, contacts })
-    )
-    .catch((err) => next(err));
+
+  const response = await deleteUserContacts(contactId);
+  return res.json({ message: "contact deleted", contacts: response });
 };
 
 const changeContacts = async (req, res, next) => {
   const { contactId } = req.params;
   const data = req.body;
 
-  changeUserContacts(contactId, data)
-    .then((respons) =>
-      res
-        .status(200)
-        .json({ message: "contact updated", code: 200, data: respons })
-    )
-    .catch((err) => next(err));
+  const response = await changeUserContacts(contactId, data);
+  return res.json({ message: "contact updated", data: response });
 };
 
 const changeStatusContacts = async (req, res, next) => {
   const { contactId } = req.params;
   const { favorite } = req.body;
-  changeUserStatusContacts(contactId, favorite)
-    .then((respons) =>
-      res.status(200).json({ message: "contact updated", code: 200, respons })
-    )
-    .catch((err) => next(err));
+
+  const response = await changeUserStatusContacts(contactId, favorite);
+  return res.status(200).json({ message: "contact updated", response });
 };
 
 module.exports = {

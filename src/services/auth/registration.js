@@ -8,7 +8,7 @@ const RequestError = require("../../helpers/requestError");
 
 const registration = async (email, password, name) => {
   if (await User.findOne({ email })) {
-    throw RequestError(401, "This email in use");
+    throw RequestError(409, "This email in use");
   }
   const user = new User({
     name,

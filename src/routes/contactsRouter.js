@@ -17,20 +17,20 @@ const {
   changeStatusContacts,
   deleteContacts,
 } = require("../controllers/contactsControllers");
-
+const cntrWrapper = require("../helpers/cntrWrapper");
 const { auth } = require("../middlewares/authorization");
 
 router.use(auth);
 
-router.get("/", getContacts);
-router.get("/:contactId", getContactsId);
-router.post("/", postContactsValidation, addContacts);
-router.put("/:contactId", putContactsValidation, changeContacts);
+router.get("/", cntrWrapper(getContacts));
+router.get("/:contactId", cntrWrapper(getContactsId));
+router.post("/", postContactsValidation, cntrWrapper(addContacts));
+router.put("/:contactId", putContactsValidation, cntrWrapper(changeContacts));
 router.put(
   "/:contactId/favorite",
   putContactsStatusValidation,
-  changeStatusContacts
+  cntrWrapper(changeStatusContacts)
 );
-router.delete("/:contactId", deleteContacts);
+router.delete("/:contactId", cntrWrapper(deleteContacts));
 
 module.exports = { contactsRouter: router };

@@ -10,55 +10,42 @@ const {
 const registrationUser = async (req, res, next) => {
   const { email, password, name } = req.body;
 
-  registration(email, password, name)
-    .then((respons) => res.status(200).json(respons))
-    .catch((err) => next(err));
+  const response = await registration(email, password, name);
+  return res.status(201).json(response);
 };
 
-const veretificationUser = (req, res, next) => {
+const veretificationUser = async (req, res, next) => {
   const { verificationToken } = req.params;
-  veretification(verificationToken)
-    .then(() => {
-      res
-        .status(200)
-        .send(
-          `<html><body><p>Please go to <a href=${process.env.REDIRECT_CONTACTS_URL}>Link</a></p></body></html>`
-        );
-    })
-    .catch((err) => next(err));
+
+  await veretification(verificationToken);
+  return res.send(
+    `<html><body><p>Please go to <a href=${process.env.REDIRECT_CONTACTS_URL}>Link</a></p></body></html>`
+  );
 };
 
-const veretificationUserRepit = (req, res, next) => {
+const veretificationUserRepit = async (req, res, next) => {
   const { email } = req.body;
 
-  veretificationRepit(email)
-    .then((response) => {
-      res.status(200).json(response);
-    })
-    .catch((err) => next(err));
+  const response = await veretificationRepit(email);
+  return res.json(response);
 };
 
-const loginUser = (req, res, next) => {
+const loginUser = async (req, res, next) => {
   const { email, password } = req.body;
-  login(email, password)
-    .then((response) => {
-      res.status(200).json(response);
-    })
-    .catch((err) => next(err));
+
+  const response = await login(email, password);
+  return res.json(response);
 };
 
-const logoutUser = (req, res, next) => {
+const logoutUser = async (req, res, next) => {
   const { id } = req.params;
   const token = null;
 
-  logout(id)
-    .then(() =>
-      res.status(204).json({
-        Authorization: `Bearer ${token}`,
-        message: "No Content",
-      })
-    )
-    .catch((err) => next(err));
+  await logout(id);
+  return res.status(204).json({
+    Authorization: `Bearer ${token}`,
+    message: "No Content",
+  });
 };
 
 module.exports = {

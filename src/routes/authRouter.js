@@ -18,13 +18,19 @@ const {
   logoutUser,
 } = require("../controllers/authControllers");
 const { updateAvatars } = require("../controllers/avatarController");
+const cntrWrapper = require("../helpers/cntrWrapper");
 
-router.post("/register", authUserValidation, registrationUser);
-router.get("/verify/:verificationToken", veretificationUser);
-router.post("/verify", veretificationUserRepit);
-router.post("/login", loginUserValidation, loginUser);
-router.post("/logout/:id", auth, logoutUser);
+router.post("/register", authUserValidation, cntrWrapper(registrationUser));
+router.get("/verify/:verificationToken", cntrWrapper(veretificationUser));
+router.post("/verify", cntrWrapper(veretificationUserRepit));
+router.post("/login", cntrWrapper(loginUserValidation), cntrWrapper(loginUser));
+router.post("/logout/:id", auth, cntrWrapper(logoutUser));
 
-router.patch("/avatars", auth, upload.single("avatar"), updateAvatars);
+router.patch(
+  "/avatars",
+  auth,
+  upload.single("avatar"),
+  cntrWrapper(updateAvatars)
+);
 
 module.exports = { authRouter: router };
