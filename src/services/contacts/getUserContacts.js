@@ -5,7 +5,7 @@ const RequestError = require("../../helpers/requestError");
 
 const getUserContacts = async (
   userId,
-  { page = 1, limit = 5, favorite = false }
+  { limit = 5, page = 1, favorite = false }
 ) => {
   if (!userId) {
     throw RequestError(400, "Not userId");
