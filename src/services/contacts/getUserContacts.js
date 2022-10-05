@@ -5,7 +5,7 @@ const RequestError = require("../../helpers/requestError");
 
 const getUserContacts = async (
   userId,
-  { limit = 5, page = 1, favorite = false }
+  { limit = 5, page = 1, favorite = "false" }
 ) => {
   if (!userId) {
     throw RequestError(400, "Not userId");
@@ -16,7 +16,7 @@ const getUserContacts = async (
   const contacts = await Contacts.find({ owner: userId })
     .skip(skip)
     .limit(Number(limit))
-    .find(favorite ? { favorite } : {});
+    .find(favorite === "false" ? {} : { favorite });
 
   if (!contacts) {
     throw RequestError(400, "Not found data");
