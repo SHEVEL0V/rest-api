@@ -4,7 +4,7 @@ const Contacts = require("../../db/contactModel");
 const RequestError = require("../../helpers/requestError");
 
 const deleteUserContacts = async (id) => {
-  const respons = await Contacts.findByIdAndDelete(id);
+  const respons = await Contacts.findByIdAndRemove(id);
   if (!respons) {
     throw RequestError(404);
   }
