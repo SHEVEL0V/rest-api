@@ -11,7 +11,7 @@ const getUserContacts = async (
     throw RequestError(400, "Not userId");
   }
 
-  const skip = Number(page * limit - limit);
+  const skip = Number((page - 1) * limit);
 
   const contacts = await Contacts.find({ owner: userId })
     .skip(skip)

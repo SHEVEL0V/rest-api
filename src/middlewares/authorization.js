@@ -25,8 +25,8 @@ module.exports = {
       req.user = user;
       console.log("<<authorized OK!>>");
       next();
-    } catch {
-      next(res.RequestError(401));
+    } catch (err) {
+      next(res.RequestError(401, err.message));
     }
   },
 };
