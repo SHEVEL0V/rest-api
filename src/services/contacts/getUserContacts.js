@@ -7,9 +7,9 @@ const getUserContacts = async (userId, { limit = 5, page = 1, favorite }) => {
   if (!userId) {
     throw RequestError(400, "Not userId");
   }
-
+  console.log(favorite);
   const skip = Number((page - 1) * limit);
-  const query = favorite ? { favorite } : null;
+  const query = favorite === "true" ? { favorite } : null;
 
   const contacts = await Contacts.find(
     { owner: userId, ...query },
