@@ -2,7 +2,7 @@
 const User = require("../../db/authModel");
 const RequestError = require("../../helpers/requestError");
 
-const veretification = async (verificationToken) => {
+const verefication = async (verificationToken) => {
   const user = await User.findOne({ verificationToken });
   if (!user) {
     throw RequestError(404);
@@ -13,4 +13,4 @@ const veretification = async (verificationToken) => {
   return { message: "Verification successful", user };
 };
 
-module.exports = { veretification };
+module.exports = { verefication };

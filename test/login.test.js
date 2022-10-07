@@ -1,13 +1,13 @@
 /** @format */
 require("dotenv").config();
-const conectMongo = require("../src/db/connection");
-const { login } = require("../src/services/authServices");
+const connectMongoDB = require("../src/db/connection");
+const { login } = require("../src/services/auth");
 
 const email = "max@mail.com";
 const password = "12345678";
 
 test("fn login response token ", async () => {
-  await conectMongo();
+  await connectMongoDB();
   expect(login(email, password)).resolves.toHaveProperty("token");
 });
 

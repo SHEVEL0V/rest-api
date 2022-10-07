@@ -3,7 +3,7 @@ const User = require("../../db/authModel");
 const { sentMail } = require("../messege");
 const RequestError = require("../../helpers/requestError");
 
-const veretificationRepit = async (email) => {
+const vereficationRepit = async (email) => {
   if (!email) {
     throw RequestError(400, "Missing required field email");
   }
@@ -22,4 +22,4 @@ const veretificationRepit = async (email) => {
   }
 };
 
-module.exports = { veretificationRepit };
+module.exports = { vereficationRepit };

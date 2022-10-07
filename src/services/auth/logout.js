@@ -3,11 +3,11 @@ const User = require("../../db/authModel");
 const RequestError = require("../../helpers/requestError");
 
 const logout = async (id) => {
-  const respons = await User.findByIdAndRemove(id);
-  if (!respons) {
+  const response = await User.findByIdAndRemove(id);
+  if (!response) {
     throw RequestError(401);
   }
-  return respons;
+  return response;
 };
 
 module.exports = { logout };

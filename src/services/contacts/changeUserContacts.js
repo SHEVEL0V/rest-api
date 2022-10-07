@@ -5,13 +5,13 @@ const RequestError = require("../../helpers/requestError");
 
 const changeUserContacts = async (id, data) => {
   const { name, email, phone } = data;
-  const respons = await Contacts.findByIdAndUpdate(id, {
+  const response = await Contacts.findByIdAndUpdate(id, {
     $set: { name, email, phone },
   });
-  if (!respons) {
+  if (!response) {
     throw RequestError(404);
   }
-  return respons;
+  return response;
 };
 
 module.exports = {

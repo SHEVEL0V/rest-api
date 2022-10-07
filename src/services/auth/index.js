@@ -2,13 +2,13 @@
 const { login } = require("./login");
 const { logout } = require("./logout");
 const { registration } = require("./registration");
-const { veretification } = require("./veretification");
-const { veretificationRepit } = require("./veretificationRepit");
+const { verefication } = require("./verefication");
+const { vereficationRepit } = require("./vereficationRepit");
 
 module.exports = {
   registration,
-  veretification,
-  veretificationRepit,
+  verefication,
+  vereficationRepit,
   login,
   logout,
 };

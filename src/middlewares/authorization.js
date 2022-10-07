@@ -21,8 +21,7 @@ module.exports = {
     }
 
     try {
-      const user = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = user;
+      req.user = jwt.verify(token, process.env.JWT_SECRET);
       console.log("<<authorized OK!>>");
       next();
     } catch (err) {

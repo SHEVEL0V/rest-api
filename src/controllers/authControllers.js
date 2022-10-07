@@ -1,8 +1,8 @@
 /** @format */
 const {
   registration,
-  veretification,
-  veretificationRepit,
+  verefication,
+  vereficationRepit,
   login,
   logout,
 } = require("../services/auth");
@@ -14,19 +14,19 @@ const registrationUser = async (req, res, next) => {
   return res.status(201).json(response);
 };
 
-const veretificationUser = async (req, res, next) => {
+const vereficationUser = async (req, res, next) => {
   const { verificationToken } = req.params;
 
-  await veretification(verificationToken);
+  await verefication(verificationToken);
   return res.send(
     `<html><body><p>Please go to <a href=${process.env.REDIRECT_CONTACTS_URL}>Link</a></p></body></html>`
   );
 };
 
-const veretificationUserRepit = async (req, res, next) => {
+const vereficationUserRepit = async (req, res, next) => {
   const { email } = req.body;
 
-  const response = await veretificationRepit(email);
+  const response = await vereficationRepit(email);
   return res.json(response);
 };
 
@@ -50,8 +50,8 @@ const logoutUser = async (req, res, next) => {
 
 module.exports = {
   registrationUser,
-  veretificationUser,
-  veretificationUserRepit,
+  vereficationUser,
+  vereficationUserRepit,
   loginUser,
   logoutUser,
 };

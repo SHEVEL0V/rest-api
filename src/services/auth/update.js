@@ -4,14 +4,14 @@ const User = require("../../db/authModel");
 const RequestError = require("../../helpers/requestError");
 
 const updateUserProfile = async (id, avatarURL) => {
-  const respons = await User.findByIdAndUpdate(id, {
+  const response = await User.findByIdAndUpdate(id, {
     $set: { avatarURL },
   });
 
-  if (!respons) {
+  if (!response) {
     throw RequestError(404);
   }
-  return respons;
+  return response;
 };
 
 module.exports = {
